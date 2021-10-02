@@ -1,43 +1,95 @@
 <template>
     <div>
-        <!--        显示内容-->
-        <div class="header-part">顶部内容</div>
-        <div class="content-box">
-            <div class="nav">
-                <router-link to="/index">首页</router-link>
-                <br>
-                <router-link to="/content/post-article">文章</router-link>
-            </div>
-            <div class="content">
-                <router-view></router-view>
-            </div>
-        </div>
+        <el-container>
+            <el-header id="admin-header-box">顶部内容</el-header>
+            <el-container>
+                <el-aside id="left-menu-list-box" width="200px">
+                    <el-row class="tac">
+                        <el-col>
+                            <el-menu
+                                    default-active="2"
+                                    class="el-menu-vertical-demo">
+                                <el-submenu index="1">
+                                    <template slot="title">
+                                        <i class="el-icon-location"></i>
+                                        <span>导航一</span>
+                                    </template>
+                                    <el-menu-item-group>
+                                        <template slot="title">分组一</template>
+                                        <el-menu-item index="1-1">选项1</el-menu-item>
+                                        <el-menu-item index="1-2">选项2</el-menu-item>
+                                    </el-menu-item-group>
+                                    <el-menu-item-group title="分组2">
+                                        <el-menu-item index="1-3">选项3</el-menu-item>
+                                    </el-menu-item-group>
+                                    <el-submenu index="1-4">
+                                        <template slot="title">选项4</template>
+                                        <el-menu-item index="1-4-1">选项1</el-menu-item>
+                                    </el-submenu>
+                                </el-submenu>
+                                <el-menu-item index="2">
+                                    <i class="el-icon-menu"></i>
+                                    <span slot="title">导航二</span>
+                                </el-menu-item>
+                                <el-menu-item index="3" disabled>
+                                    <i class="el-icon-document"></i>
+                                    <span slot="title">导航三</span>
+                                </el-menu-item>
+                                <el-menu-item index="4">
+                                    <i class="el-icon-setting"></i>
+                                    <span slot="title">导航四</span>
+                                </el-menu-item>
+                            </el-menu>
+                        </el-col>
+                    </el-row>
+                </el-aside>
+                <el-container>
+                    <el-main>
+                        <div class="content">
+                            <router-view></router-view>
+                        </div>
+                    </el-main>
+                </el-container>
+            </el-container>
+        </el-container>
     </div>
 </template>
 
 <script>
     export default {
-        name: "base"
+        //生命周期
+        mounted: function () {
+            //动态设置侧边菜单栏的高度
+            let leftMenuLBox = document.getElementById("left-menu-list-box");
+            let adminHeaderBox = document.getElementById("admin-header-box");
+            if (leftMenuLBox && adminHeaderBox) {
+                leftMenuLBox.style.height = (window.innerHeight - adminHeaderBox.innerText) + 'px';
+            }
+        }
     }
 </script>
 
 <style>
-    .header-part {
-        background: aqua;
+    .el-header, .el-footer {
+        background-color: #B3C0D1;
+        color: #333;
+        text-align: center;
+        line-height: 46px;
+        height: 46px !important;
     }
 
-    .nav {
-        float: left;
-        background: antiquewhite;
-        height: 500px;
-        width: 159px;
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 100px;
     }
 
-    .content {
-        width: 800px;
-        height: 500px;
-        background: aliceblue;
-        float: left;
-
+    .el-main {
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
     }
+
+
 </style>

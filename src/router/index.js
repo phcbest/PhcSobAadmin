@@ -1,3 +1,4 @@
+/*使用这个类来初始化路由和路由列表*/
 import VueRouter from "vue-router";
 import Vue from "vue";
 
