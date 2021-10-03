@@ -35,9 +35,15 @@
     import {routes} from "../router"
 
     export default {
+        data: function () {
+            return {
+                menuList: []
+            }
+        },
         mounted: function () {
-            let children = routes[0].children;
-            console.log(children)
+            let menuList = routes[0];
+            this.menuList = menuList.children;
+            console.log(this.menuList)
         }
     }
 </script>
