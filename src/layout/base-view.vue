@@ -1,7 +1,9 @@
 <template>
     <div>
         <el-container>
-            <el-header id="admin-header-box">顶部内容</el-header>
+            <el-header id="admin-header-box">
+                <top-header></top-header>
+            </el-header>
             <el-container>
                 <el-aside id="left-menu-list-box" width="200px">
                     <left-menu/>
@@ -35,20 +37,13 @@
 <style>
     .el-header {
         background-color: dodgerblue;
-        color: #ffffff;
-        text-align: center;
         line-height: 46px;
         height: 46px !important;
     }
 
     .el-aside {
+        border-right: aliceblue solid 1px;
         line-height: 100px;
-    }
-
-    .el-main {
-        background-color: #E9EEF3;
-        color: #333;
-        text-align: center;
     }
 
 

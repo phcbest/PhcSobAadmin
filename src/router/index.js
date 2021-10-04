@@ -117,7 +117,7 @@ export const routes = [
             {
                 path: "/operation",
                 hidden: false,
-                icon: "",
+                icon: "el-icon-s-cooperation",
                 name: "运营",
                 component: rightView,
                 children: [

@@ -1,33 +1,35 @@
 <template>
 
     <el-menu
-            default-active="1-1"
-            class="el-menu-vertical-demo">
-        <el-menu-item index="2">
-            <i class="el-icon-s-home  "></i>
-            <span slot="title">首页</span>
-        </el-menu-item>
+            default-active="0"
+            :unique-opened="true"
+            class="el-menu-vertical">
+        <!--遍历菜单内容 两种，一种有子类的，一种没子类的-->
+        <template v-for="(item,index) in menuList">
+            <router-link :to="item.path" v-if="!item.children&&!item.hidden" :key="index">
+                <el-menu-item :index="index+''">
+                    <i :class="item.icon"></i>
+                    <span slot="title">{{item.name}}</span>
+                </el-menu-item>
+            </router-link>
 
-        <el-submenu index="1">
-            <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-            </template>
-            <el-menu-item index="1-1">
-                <i class="el-icon-user"/>
-                <span slot="title">选项1</span>
-            </el-menu-item>
-            <el-menu-item index="1-2">
-                <i class="el-icon-menu"/>
-                <span slot="title">选项2</span>
-            </el-menu-item>
-            <el-menu-item index="1-3">
-                <i class="el-icon-star-on"/>
-                <span slot="title">选项3</span>
-            </el-menu-item>
-        </el-submenu>
+            <el-submenu :key="index" :index="index+''" v-if="item.children&&!item.hidden">
+                <template slot="title">
+                    <i :class="item.icon"></i>
+                    <span>{{item.name}}</span>
+                </template>
+                <template v-for="(subItem,subIndex) in item.children">
+                    <router-link v-if="!subItem.hidden"
+                                 :to="item.path+'/'+subItem.path" :key="subIndex">
+                        <el-menu-item :index="index+'-'+subIndex">
+                            <i :class="subItem.icon"></i>
+                            <span>{{subItem.name}}</span>
+                        </el-menu-item>
+                    </router-link>
+                </template>
 
-
+            </el-submenu>
+        </template>
     </el-menu>
 </template>
 
@@ -49,5 +51,7 @@
 </script>
 
 <style scoped>
-
+    .el-menu-vertical a {
+        text-decoration: none;
+    }
 </style>
