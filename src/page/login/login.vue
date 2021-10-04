@@ -1,6 +1,10 @@
 <template>
-    <div>
-        登录页面
+    <div class="admin-login-box">
+        <div class="admin-login-header-box">
+            <div class="admin-login-header-center">
+                <div class="admin-login-logo"></div>
+            </div>
+        </div>
     </div>
 </template>
 
