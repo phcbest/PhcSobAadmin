@@ -37,6 +37,8 @@
 </template>
 
 <script>
+    const axios = require('axios').default;
+
     export default {
         name: "login",
         data: function () {
@@ -59,8 +61,12 @@
 
             },
             updateVerifyCode: function () {
-                this.captchaPath = 'http://api.coincent.cn/user/utils/captcha?captcha_key=' + Date.parse(new Date().toLocaleDateString())
-                    + '&random=' + Math.random();
+                axios
+                    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+                    .then(response => {
+                        console.log(response)
+                    });
+                this.captchaPath = 'http://api.coincent.cn/user/utils/captcha?captcha_key=' + Date.now();
                 console.log(this.captchaPath);
             }
         },
@@ -75,9 +81,10 @@
     .captcha-code {
         cursor: pointer;
         width: 100px;
+        margin-left: 10px;
         /*图片居中*/
         vertical-align: middle;
-        height: 30px;
+        height: 40px;
     }
 
     .center {
