@@ -18,7 +18,7 @@
                                 <el-input v-model="sobUser.userName" placeholder="用户名/邮箱地址"></el-input>
                             </el-form-item>
                             <el-form-item label="密码" required>
-                                <el-input v-model="sobUser.password" placeholder="密码"></el-input>
+                                <el-input type="password" v-model="sobUser.password" placeholder="密码"></el-input>
                             </el-form-item>
                             <el-form-item label="人类验证码" required>
                                 <el-input v-model="loginInfo.verifyCode" placeholder="验证码"></el-input>
@@ -39,6 +39,7 @@
 <script>
     const axios = require('axios').default;
 
+
     export default {
         name: "login",
         data: function () {
@@ -58,15 +59,23 @@
         },
         methods: {
             doLogin: function () {
-
+                //发起登录
+                console.log(this.sobUser)
+                console.log(this.loginInfo)
+                axios({
+                    method: 'post',
+                    url: '/user/user/login/' + this.loginInfo.verifyCode + '/' + this.loginInfo.captcha_key + '?from=p_',
+                    data: this.sobUser
+                }).then(result => {
+                    console.log(result.data)
+                });
+                //检查数据
+                //提交数据
+                //处理结果
             },
             updateVerifyCode: function () {
-                axios
-                    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-                    .then(response => {
-                        console.log(response)
-                    });
-                this.captchaPath = 'http://api.coincent.cn/user/utils/captcha?captcha_key=' + Date.now();
+                this.loginInfo.captcha_key = Date.now();
+                this.captchaPath = 'http://api.coincent.cn/user/utils/captcha?captcha_key=' + this.loginInfo.captcha_key;
                 console.log(this.captchaPath);
             }
         },
